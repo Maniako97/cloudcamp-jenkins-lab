@@ -13,6 +13,11 @@ node ('docker'){
     }
 
     stage ('Build') {
-        sh 'docker build -t "app/python-hello-world:1.0.0-beta.1" -f _scm_docker/Dockerfile _scm_docker/'
+        sh 'docker build -t "python-hello-world:1.0.0-beta.1" -f _scm_docker/Dockerfile _scm_docker/'
+    }
+    stage ('Push') {
+        sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 145675154975.dkr.ecr.us-east-1.amazonaws.com'
+        sh 'docker tag python-hello-world:1.0.0-beta.1 145675154975.dkr.ecr.us-east-1.amazonaws.com/hello-world-python:1.0.0-beta.1'
+        sh 'docker push 145675154975.dkr.ecr.us-east-1.amazonaws.com/hello-world-python:1.0.0-beta.1'
     }
 }
