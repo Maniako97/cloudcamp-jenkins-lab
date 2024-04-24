@@ -3,7 +3,7 @@
 node ('docker'){
     checkoutFromRepo('bootcamp','https://github.com/Maniako97/cloudcamp-jenkins-lab', 'git-credentials')
 
-    buildDockerfile("hello-world-python:latest", "_scm_docker/Dockerfile")
+    buildDockerfile("hello-world-python:latest")
 
     //pushDockerImage("us-east-1")
     
@@ -30,7 +30,7 @@ def buildDockerfile(tag, context=".", fileArg="")
         path="-f ${fileArg}"
     }
     stage ('Build') {
-        sh "exec docker build -t ${tag} ${path} ${context}"
+        sh "exec docker build -t ${tag} -f _scm_docker/Dockerfile ${context}"
     }
 }
 
