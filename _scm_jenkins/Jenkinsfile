@@ -7,7 +7,7 @@ node ('docker'){
 
         checkout scmGit(
                         branches: 
-                        [[name: 'maniako97/jenkinsfile']], 
+                        [[name: 'bootcamp']], 
                         extensions: [], 
                         userRemoteConfigs: [[url: 'https://github.com/maniako97/cloudcamp-jenkins-lab']]
                         ) 
